@@ -64,11 +64,19 @@ class Model {
             
             this.inform();
       }
+      anterior(){
+            if (this.preguntas.length > this.preguntaActual + 1) {
+                  this.preguntaActual = this.preguntaActual - 1;
+            } else if (this.preguntas.length != this.respuestas.length) {
+                  this.respondido = false;
+            }
+            this.inform();
+      }
       seleccionar(e) {
             let respuesta = e.target.id;
             for (let i in this.preguntas[this.preguntaActual].opciones) {
                   if (respuesta == i) {
-                        this.respuestas.push(this.preguntas[this.preguntaActual].opciones[i]);
+                        this.respuestas[this.preguntaActual] = this.preguntas[this.preguntaActual].opciones[i];
                   }
             }
             this.contarCorrectas();
@@ -155,6 +163,16 @@ const App = ({title, model}) => {
                                     {!model.revisar && <button className='btn btn-default btn-lg' onClick={() => model.revisarCuestionario()}>Enviar</button>}
                               </div>
                   </div>      </div>
+                  }
+                  {!model.revisar && model.respuestas.length != 0 &&
+                        <div id="flechas" className="text-center">
+                              <button id="anterior" className={model.respuestas.length >= model.preguntaActual && model.preguntaActual?'btn':"btn disabled"} onClick={()=>{model.anterior()}}>
+                                    <img className="img-responsive" src="img/left.svg" />
+                              </button>
+                              <button id="siguiente" className={model.respuestas.length > model.preguntaActual ? 'btn':"btn disabled"} onClick={()=>{model.siguiente()}} >
+                                    <img className="img-responsive" src="img/right.svg" />
+                              </button>
+                        </div>
                   }
             </div>
       );
