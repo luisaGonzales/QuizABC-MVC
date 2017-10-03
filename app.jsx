@@ -46,6 +46,7 @@ class Model {
             this.correctas = 0;
             this.preguntaActual = 0;
             this.respondido = false;
+            this.revisar = false;
       }
 
       subscribe(render) {
@@ -95,11 +96,26 @@ const App = ({title, model}) => {
                         </div>
                   );
             });
-
+      // const preguntas = model.preguntas.map((preguntas, index)=>{
+      //       return(
+      //             <div>
+      //                   {index + 1} .{preguntas.pregunta}
+      //             </div>
+      //       );
+      // });
+      const respuestas = model.respuestas.map((usuario, indexRespuestas) => {
+            if (usuario == model.preguntas[indexRespuestas].correcta && model.revisar) {
+                  return <p className="text-success">{indexRespuestas + 1}. {model.preguntas[indexRespuestas].pregunta}<strong> {usuario}</strong></p>
+            } else if (model.revisar) {
+                  return <p className="text-danger">{indexRespuestas + 1}. {model.preguntas[indexRespuestas].pregunta}<strong><strike> {usuario}</strike> {preguntas[indexRespuestas].correcta}</strong></p>
+            } else {
+                  return <p>{indexRespuestas + 1}. {model.preguntas[indexRespuestas].pregunta}<strong> {usuario}</strong></p>;
+            }
+      })
       return (
             <div>
                   <section>
-                        {!model.respondido && <img src={preguntas[model.preguntaActual].imagen} />}
+                        {!model.respondido && <img src={model.preguntas[model.preguntaActual].imagen} />}
                         {model.respondido && <img src="img/truck.svg"/>} 
                   </section>
                   
@@ -116,14 +132,18 @@ const App = ({title, model}) => {
                   }
                   {model.respondido && 
                   <div>
+                        <div>{model.respuestas.length} de {model.preguntas.length} preguntas contestadas</div>
+                        <div className="progress">
+                              <div className="progress-bar" role="progressbar" aria-valuemax="100" style={{ width: model.respuestas.length * 20 + '%', height: '10px' }}>
+                              </div>
+                        </div>
                         <h1>
                               Estas son tus respuestas
                         </h1>
-                        <div>{model.respuestas.length} de {model.preguntas.length} preguntas contestadas</div>
-                              <div className="progress">
-                                    <div className="progress-bar" role="progressbar" aria-valuemax="100" style={{ width: model.respuestas.length * 20 + '%', height: '10px' }}>
-                                    </div>
-                              </div>
+                        <div>
+                              {/* <span>{preguntas}</span> */}
+                              <span>{respuestas}</span>
+                        </div>
                   </div>
                   }
             </div>
