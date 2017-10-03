@@ -32,3 +32,59 @@ body {
 #progreso .progress {
     height: 6px;
 }
+
+.pregunta {
+    background-color: #fff;
+    padding: 5vw 5vw;
+    box-shadow: 0px 0px 25px #CEC3BA;
+}
+
+.titulo {
+    font-size: 1.8em;
+    margin: 3vw 1vw;
+    margin-bottom: 0;
+}
+
+.opciones {
+    margin-top: 40px;
+    margin-bottom: 10px;
+}
+
+
+.seleccion {
+    display: inline-block;
+    position: relative;
+    text-align: right;
+    transition: 0.5s;
+}
+
+.seleccion:after {
+    font-family: FontAwesome;
+    position: absolute;
+    opacity: 0;
+    top: -10px;
+    right: -115px;
+    transition: 0.5s;
+    content: "\f058";
+}
+
+/* .seleccionado button:after {
+    font-family: FontAwesome;
+    content: "\f08d";
+    position: absolute;
+    right: 30px;
+    top: 7px;
+} */
+
+.btn-abc:hover .seleccion {
+    padding-right: -15px;
+}
+
+.btn-abc:active .seleccion:after {
+    color: white;
+}
+
+.btn-abc:hover .seleccion:after {
+    opacity: 1;
+    right: -20px;
+}

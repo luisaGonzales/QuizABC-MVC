@@ -107,12 +107,17 @@ class Model {
 const App = ({title, model}) => {
       const items = model.preguntas[model.preguntaActual].opciones.map((alternativa, index) => {
                   return (
-                        <div>
+                        <div className="text-center">
+                               <div className= 'col-lg-4 col-md-4 col-sm-4 col-xs-12 seleccionado'>
                               <button
+                                    className='btn btn-block btn-abc text-center'
                                     id={index}
                                     onClick={e => {
                                     model.seleccionar(e)
-                              }}>{alternativa}</button>
+                              }}>{alternativa}
+                              <span className="seleccion"></span>
+                              </button>
+                              </div>
                         </div>
                   );
             });
@@ -147,17 +152,21 @@ const App = ({title, model}) => {
                               </div>
                               
                               
-                              <h1>{model.preguntas[model.preguntaActual].pregunta}</h1>
-                              <div>{items}</div>
+                              <h1 className="text-center titulo">{model.preguntas[model.preguntaActual].pregunta}</h1>
+                              <div className="opciones row">{items}</div>
                         </div>
                   }
                   {model.respondido && 
-                  <div>
-                        <div>{model.respuestas.length} de {model.preguntas.length} preguntas contestadas</div>
-                        <div className="progress">
-                              <div className="progress-bar" role="progressbar" aria-valuemax="100" style={{ width: model.respuestas.length * 20 + '%', height: '10px' }}>
+                        <div>
+                              <div className="row estado" id="progreso">
+                                    <div className="col-md-12 col-lg-12 col-xs-12 col-sm-12">
+                                          <div>{model.respuestas.length} de {model.preguntas.length} preguntas contestadas</div>
+                                          <div className="progress">
+                                                <div className="progress-bar" role="progressbar" aria-valuemax="100" style={{ width: model.respuestas.length * 20 + '%', height: '10px' }}>
+                                                </div>
+                                          </div>
+                                    </div>
                               </div>
-                        </div>
                         <div className="col-md-12 col-lg-12">
                               <h1 className="titulo">
                                     {!model.revisar && 'Estas son tus respuestas!'}
