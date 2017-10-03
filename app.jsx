@@ -51,7 +51,7 @@ class Model {
    siguiente(){
          if(this.preguntas.length >= this.preguntaActual){
             this.preguntaActual = this.preguntaActual + 1;  
-         } else{
+         } else{ 
                
          }
          this.inform();
@@ -60,10 +60,15 @@ class Model {
             let respuesta = e.target.id;
             for( let i in this.preguntas[this.preguntaActual].opciones){
                   if(respuesta == i){
-                        this.respuestas.push(this.preguntas[this.preguntaActual].opciones[i])
-                        console.log(this.respuestas); 
+                        this.respuestas.push(this.preguntas[this.preguntaActual].opciones[i]);
                   }
             }
+            if(this.respuestas[this.preguntaActual] == this.preguntas[this.preguntaActual].correcta){
+                  this.correctas = this.correctas + 1;
+            }
+            
+            console.log(this.respuestas); 
+            console.log(this.correctas);
          this.siguiente();
    }
 }
@@ -82,6 +87,9 @@ const App = ({ title, model }) => {
                   <section>
                         <img src={model.preguntas[model.preguntaActual].imagen} alt="imagen"/>
                   </section>
+                  <div>
+                        <h1>{model.preguntas[model.preguntaActual].pregunta}</h1>
+                  </div>
                   <div>
                         <div>{items}</div>
                   </div>
