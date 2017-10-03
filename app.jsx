@@ -47,6 +47,7 @@ class Model {
             this.preguntaActual = 0;
             this.respondido = false;
             this.revisar = false;
+            this.abc = ["A", "B", "C"];
       }
 
       subscribe(render) {
@@ -106,6 +107,13 @@ class Model {
 }
 
 const App = ({title, model}) => {
+      const abc = model.abc.map((abc, index) => {
+            console.log(abc);
+            return 
+                  <div key={index}> 
+                        {abc}
+                  </div>
+      });
       const items = model.preguntas[model.preguntaActual].opciones.map((alternativa, index) => {
                   return (
                         <div className="text-center">
@@ -115,7 +123,7 @@ const App = ({title, model}) => {
                                     id={index}
                                     onClick={e => {
                                     model.seleccionar(e)
-                              }}>{alternativa}
+                              }}>{abc} {alternativa}
                               <span className="seleccion"></span>
                               </button>
                               </div>
