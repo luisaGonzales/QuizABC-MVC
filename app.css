@@ -88,3 +88,39 @@ body {
     opacity: 1;
     right: -20px;
 }
+
+#respuestas,
+#resumen {
+    text-align: left !important;
+    padding: 5vw;
+}
+
+.twitter {
+    color: #65a2d9 !important;
+}
+
+.facebook {
+    color: #3b5998 !important;
+}
+
+.google {
+    color: #de5449 !important;
+}
+
+#redesSociales {
+    margin-top: 30px;
+    opacity: 0.5;
+    color: white;
+}
+
+#redesSociales:hover {
+    opacity: 1;
+}
+
+#anterior {
+    background-color: transparent !important;
+}
+
+#siguiente {
+    background-color: transparent !important;
+}

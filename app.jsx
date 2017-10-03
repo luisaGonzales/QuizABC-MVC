@@ -60,16 +60,17 @@ class Model {
                   this.preguntaActual = this.preguntaActual + 1;
             } else if (this.preguntas.length == this.respuestas.length) {
                   this.respondido = true;
+            } else if (this.respondido){
+                  this.preguntaActual = this.preguntaActual + 1;
             }
             
             this.inform();
       }
       anterior(){
-            if (this.preguntas.length > this.preguntaActual + 1) {
-                  this.preguntaActual = this.preguntaActual - 1;
-            } else if (this.preguntas.length != this.respuestas.length) {
+            if (this.preguntas.length != this.respuestas.length) {
                   this.respondido = false;
             }
+            this.preguntaActual = this.preguntaActual - 1;
             this.inform();
       }
       seleccionar(e) {
@@ -151,9 +152,28 @@ const App = ({title, model}) => {
                                     </div>
                               </div>
                               
+                              <div className="col-md-12 col-lg-12 pregunta">
+                                    <h1 className="text-center titulo">{model.preguntas[model.preguntaActual].pregunta}</h1>
+                                    <div className="opciones row">{items}</div>
                               
-                              <h1 className="text-center titulo">{model.preguntas[model.preguntaActual].pregunta}</h1>
-                              <div className="opciones row">{items}</div>
+                                    <div className="row">
+                                          <div className="col-md-offset-3 col-md-6 " id="redesSociales">
+                                                <span className="fa-stack fa-lg ">
+                                                      <i className="fa fa-circle fa-stack-2x fa-inverse fa-2x twitter"></i>
+                                                      <i className="fa fa-twitter fa-stack-1x"></i>
+                                                </span>
+                                                <span className="fa-stack fa-lg ">
+                                                      <i className="fa fa-circle fa-stack-2x fa-inverse fa-2x facebook"></i>
+                                                      <i className="fa fa-facebook fa-stack-1x"></i>
+                                                </span>
+                                                <span className="fa-stack fa-lg ">
+                                                      <i className="fa fa-circle fa-stack-2x fa-inverse fa-2x google"></i>
+                                                      <i className="fa fa-google-plus fa-stack-1x"></i>
+                                                </span>
+                                          </div>
+                                    </div>
+                              </div>
+                              
                         </div>
                   }
                   {model.respondido && 
@@ -167,7 +187,7 @@ const App = ({title, model}) => {
                                           </div>
                                     </div>
                               </div>
-                        <div className="col-md-12 col-lg-12">
+                        <div className="col-md-12 col-lg-12 pregunta">
                               <h1 className="titulo">
                                     {!model.revisar && 'Estas son tus respuestas!'}
                                     {model.revisar && model.correctas + ' de ' + model.preguntas.length + ' correctas!!'}
@@ -182,6 +202,7 @@ const App = ({title, model}) => {
                         </div>      
                   </div>
                   }
+                  
                   {!model.revisar && model.respuestas.length != 0 &&
                         <div id="flechas" className="text-center">
                               <button id="anterior" className={model.respuestas.length >= model.preguntaActual && model.preguntaActual?'btn':"btn disabled"} onClick={()=>{model.anterior()}}>
