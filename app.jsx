@@ -48,14 +48,23 @@ class Model {
    inform() {
       this.render();
    }
-   aumentar(){
-         this.preguntaActual = this.preguntaActual + 1;
+   siguiente(){
+         if(this.preguntas.length >= this.preguntaActual){
+            this.preguntaActual = this.preguntaActual + 1;  
+         } else{
+               
+         }
          this.inform();
    }
    seleccionar(e){
             let respuesta = e.target.id;
-            console.log(respuesta);
-         this.aumentar();
+            for( let i in this.preguntas[this.preguntaActual].opciones){
+                  if(respuesta == i){
+                        this.respuestas.push(this.preguntas[this.preguntaActual].opciones[i])
+                        console.log(this.respuestas); 
+                  }
+            }
+         this.siguiente();
    }
 }
 
