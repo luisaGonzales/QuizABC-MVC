@@ -77,10 +77,22 @@ class Model {
                   ()=>{this.siguiente()}, 900
             )
       }
+      revisarCuestionario(e){
+            this.revisar = true;
+            this.inform();
+      }
       contarCorrectas() {
             if (this.respuestas[this.preguntaActual] == this.preguntas[this.preguntaActual].correcta) {
                   this.correctas = this.correctas + 1;
             }
+      }
+      reiniciar(){
+            this.respuestas = [];
+            this.correctas = 0;
+            this.preguntaActual = 0;
+            this.respondido = false;
+            this.revisar = false;
+            this.inform();
       }
 }
 
@@ -96,13 +108,6 @@ const App = ({title, model}) => {
                         </div>
                   );
             });
-      // const preguntas = model.preguntas.map((preguntas, index)=>{
-      //       return(
-      //             <div>
-      //                   {index + 1} .{preguntas.pregunta}
-      //             </div>
-      //       );
-      // });
       const respuestas = model.respuestas.map((usuario, indexRespuestas) => {
             if (usuario == model.preguntas[indexRespuestas].correcta && model.revisar) {
                   return <p className="text-success">{indexRespuestas + 1}. {model.preguntas[indexRespuestas].pregunta}<strong> {usuario}</strong></p>
@@ -137,14 +142,19 @@ const App = ({title, model}) => {
                               <div className="progress-bar" role="progressbar" aria-valuemax="100" style={{ width: model.respuestas.length * 20 + '%', height: '10px' }}>
                               </div>
                         </div>
-                        <h1>
-                              Estas son tus respuestas
-                        </h1>
-                        <div>
-                              {/* <span>{preguntas}</span> */}
-                              <span>{respuestas}</span>
-                        </div>
-                  </div>
+                        <div className="col-md-12 col-lg-12">
+                              <h1 className="titulo">
+                                    {!model.revisar && 'Estas son tus respuestas!'}
+                                    {model.revisar && model.correctas + ' de ' + model.preguntas.length + ' correctas!!'}
+                              </h1>
+                              <div>
+                                    <span>{respuestas}</span>
+                              </div> 
+                              <div className='text-center'>
+                                    {model.revisar && <button className='btn btn-default btn-lg' onClick={() => model.reiniciar()}>Start Again</button>}
+                                    {!model.revisar && <button className='btn btn-default btn-lg' onClick={() => model.revisarCuestionario()}>Enviar</button>}
+                              </div>
+                  </div>      </div>
                   }
             </div>
       );
