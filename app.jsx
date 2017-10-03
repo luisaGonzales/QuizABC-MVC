@@ -127,19 +127,27 @@ const App = ({title, model}) => {
       })
       return (
             <div>
-                  <section>
-                        {!model.respondido && <img src={model.preguntas[model.preguntaActual].imagen} />}
-                        {model.respondido && <img src="img/truck.svg"/>} 
-                  </section>
-                  
+                  <section className="container quiz text-center">
+                  <div className="row text-center">
+                        <div className="col-md-offset-3 col-md-6 col-md-offset-3 ">
+                              {!model.respondido && <img src={model.preguntas[model.preguntaActual].imagen} />}
+                              {model.respondido && <img src="img/truck.svg"/>} 
+                        </div>
+                  </div>
                   {!model.respondido &&  
-                        <div>
-                              <h1>{model.preguntas[model.preguntaActual].pregunta}</h1>
-                              <div>{model.respuestas.length} de {model.preguntas.length} preguntas contestadas</div>
-                              <div className="progress">
-                                    <div className="progress-bar" role="progressbar" aria-valuemax="100" style={{ width: model.respuestas.length * 20 + '%', height: '10px' }}>
+                        <div className="row contenido">
+                              <div className="row estado" id="progreso">
+                                    <div className="col-md-12 col-lg-12 col-xs-12 col-sm-12">
+                                          <div>{model.respuestas.length} de {model.preguntas.length} preguntas contestadas</div>
+                                          <div className="progress">
+                                                <div className="progress-bar" role="progressbar" aria-valuemax="100" style={{ width: model.respuestas.length * 20 + '%', height: '10px' }}>
+                                                </div>
+                                          </div>
                                     </div>
                               </div>
+                              
+                              
+                              <h1>{model.preguntas[model.preguntaActual].pregunta}</h1>
                               <div>{items}</div>
                         </div>
                   }
@@ -162,7 +170,8 @@ const App = ({title, model}) => {
                                     {model.revisar && <button className='btn btn-default btn-lg' onClick={() => model.reiniciar()}>Start Again</button>}
                                     {!model.revisar && <button className='btn btn-default btn-lg' onClick={() => model.revisarCuestionario()}>Enviar</button>}
                               </div>
-                  </div>      </div>
+                        </div>      
+                  </div>
                   }
                   {!model.revisar && model.respuestas.length != 0 &&
                         <div id="flechas" className="text-center">
@@ -174,6 +183,7 @@ const App = ({title, model}) => {
                               </button>
                         </div>
                   }
+                  </section>
             </div>
       );
 }

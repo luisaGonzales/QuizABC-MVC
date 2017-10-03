@@ -1,0 +1,34 @@
+* {
+    font-family: 'Ubuntu', sans-serif;
+    box-sizing: border-box;
+}
+
+
+/* Cuerpo */
+
+body {
+    background-color: #fff3ec;
+    color: #423f5c;
+}
+
+.quiz {
+    height: 95vh;
+    padding: 5vw 0;
+}
+
+.contenido {
+    margin-top: 20px;
+}
+
+.progress {
+    margin-bottom: 0 !important;
+    margin-top: 1% !important;
+}
+
+.progress-bar {
+    background-color: #423f5c !important;
+}
+
+#progreso .progress {
+    height: 6px;
+}
